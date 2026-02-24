@@ -16,8 +16,7 @@ export interface Job {
   isActive?: boolean;
 }
 
-// Jobs response es simplemente un Array de Job, por lo que podemos usar Job[]
-
+// ...
 
 export interface ApplyResponse {
   ok: boolean;

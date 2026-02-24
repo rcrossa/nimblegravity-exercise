@@ -17,9 +17,7 @@ export default function EmailLogin() {
 
     try {
       const resp = await apiClient.getCandidateByEmail(email);
-      // Challenge requirement: Ensure we have the user identifiers
       if (resp && resp.uuid && resp.candidateId) {
-        // Store candidate identifiers in session storage 
         sessionStorage.setItem('candidateId', String(resp.candidateId));
         sessionStorage.setItem('uuid', resp.uuid);
         sessionStorage.setItem('email', resp.email);

@@ -11,9 +11,6 @@ export class ApiError extends Error {
   }
 }
 
-/**
- * Generic fetch wrapper to handle errors consistently
- */
 async function fetchClient<T>(endpoint: string, options?: RequestInit): Promise<T> {
   const response = await fetch(`${BASE_URL}${endpoint}`, {
     ...options,

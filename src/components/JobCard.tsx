@@ -28,7 +28,7 @@ export default function JobCard({ job, candidateId }: JobCardProps) {
       
       if (resp.ok) {
         setFeedback({ type: 'success', message: 'Application submitted successfully!' });
-        setRepoUrl(''); // Clear form on success
+        setRepoUrl('');
       } else {
         setFeedback({ type: 'error', message: resp.message || 'Submission failed' });
       }

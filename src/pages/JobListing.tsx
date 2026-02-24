@@ -14,7 +14,6 @@ export default function JobListing() {
   const userEmail = sessionStorage.getItem('email');
 
   useEffect(() => {
-    // Redirect if no candidate ID is found in session
     if (!candidateId) {
       navigate('/');
       return;
@@ -24,8 +23,6 @@ export default function JobListing() {
       try {
         const resp = await apiClient.getJobs();
         if (Array.isArray(resp)) {
-          // Si pasaron la validación son un array de trabajos.
-          // Ignoramos la key opcional y mapeamos de igual forma por si la API regresa isActive = false
           setJobs(resp.filter(j => j.isActive !== false));
         } else {
           setErrorMsg('Failed to load job listings from server');
@@ -46,7 +43,7 @@ export default function JobListing() {
     fetchJobs();
   }, [candidateId, navigate]);
 
-  if (!candidateId) return null; // Avoid flicker before redirect
+  if (!candidateId) return null;
 
   return (
     <div className="w-full">
