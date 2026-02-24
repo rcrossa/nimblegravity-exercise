@@ -17,7 +17,7 @@ export default function EmailLogin() {
 
     try {
       const resp = await apiClient.getCandidateByEmail(email);
-      if (resp && resp.uuid && resp.candidateId) {
+      if (resp?.uuid && resp?.candidateId) {
         sessionStorage.setItem('candidateId', String(resp.candidateId));
         sessionStorage.setItem('uuid', resp.uuid);
         sessionStorage.setItem('email', resp.email);

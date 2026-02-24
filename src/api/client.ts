@@ -22,7 +22,7 @@ async function fetchClient<T>(endpoint: string, options?: RequestInit): Promise<
 
   const data = await response.json().catch(() => null);
 
-  if (!response.ok || (data && data.ok === false)) {
+  if (!response.ok || data?.ok === false) {
     throw new ApiError(data?.message || data?.details || 'An unknown API error occurred', response.status);
   }
 

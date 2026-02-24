@@ -3,8 +3,8 @@ import type { Job } from '../types';
 import { apiClient, ApiError } from '../api/client';
 
 interface JobCardProps {
-  job: Job;
-  candidateId: number;
+  readonly job: Job;
+  readonly candidateId: number;
 }
 
 export default function JobCard({ job, candidateId }: JobCardProps) {
