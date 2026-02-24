@@ -1,73 +1,48 @@
-# React + TypeScript + Vite
+# Nimble Gravity Challenge
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository contains the candidate solution for the **Nimble Gravity Frontend Challenge**. It implements a React Single Page Application (SPA) designed to authenticate candidates, fetch open job listings from the provided Azure backend API, and allow the submission of a GitHub repository link as an application to those roles.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Candidate Authentication**: Securely captures the candidate's email, validates it against the backend, and persists session data.
+- **Job Listings Dashboard**: Consumes the `/api/jobs/get-list` endpoint, rendering available roles filtered by their active status.
+- **Application Submission**: Allows candidates to easily submit a GitHub repository URL to apply for any specific role.
+- **Robust Error Handling**: Safely catches server-side and client-side errors, displaying comprehensive user-friendly alerts.
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+The application has been built strictly adhering to modern frontend standards and the challenge requirements:
 
-## Expanding the ESLint configuration
+- **Framework**: React (Bootstrapped via Vite)
+- **Language**: TypeScript (Strict typing for robust API data models)
+- **Styling**: Tailwind CSS v4 (Clean, modern utilities and aesthetic details)
+- **Routing**: React Router DOM (Simulated SPA transitions)
+- **State Management**: React Hooks (useState, useEffect)
+- **Tooling**: pnpm (Package Manager)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## How to Run Locally
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+If you are an evaluator or developer, follow these steps to run the application on your computer:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+1. Clone this repository and navigate to the root directory.
+2. Open your terminal and navigate into the nested `repositorio` folder.
+3. Ensure your Node environment is active (the project assumes an environment managed by `nvm`).
+4. Install the dependencies using your package manager (`pnpm install`).
+5. Start the development server using `pnpm run dev`.
+6. Open your browser at the local port provided in the terminal (usually `http://localhost:5173`).
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Project File Structure
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+All the source code implemented for the challenge resides inside the `repositorio/src` directory:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- `api/`: Contains the isolated `client.ts` fetch wrapper for making network requests.
+- `components/`: Contains modular UI elements like the `JobCard`.
+- `pages/`: Contains the main routing views (`EmailLogin` and `JobListing`).
+- `types/`: Contains the strictly defined TypeScript models corresponding to the API schemas.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Evaluation Note
+
+The core focus of this implementation was code quality, separation of concerns, native HTTP handling without excessive dependencies, and a neat visual presentation as requested in the challenge prompt parameters.
+
+---
+*Developed for the Nimble Gravity recruiting process.*
