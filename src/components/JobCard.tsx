@@ -12,7 +12,7 @@ export default function JobCard({ job, candidateId }: JobCardProps) {
   const [loading, setLoading] = useState(false);
   const [feedback, setFeedback] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
-  const handleApply = async (e: React.FormEvent) => {
+  const handleApply = async (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!repoUrl) return;
 
@@ -59,8 +59,8 @@ export default function JobCard({ job, candidateId }: JobCardProps) {
       <div className="mb-6">
         <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-2">Requirements</h4>
         <ul className="text-sm text-slate-700 list-disc list-inside space-y-1">
-          {(job.requirements || []).slice(0, 3).map((req, i) => (
-            <li key={i} className="truncate">{req}</li>
+          {(job.requirements || []).slice(0, 3).map((req) => (
+            <li key={req} className="truncate">{req}</li>
           ))}
           {(job.requirements || []).length > 3 && <li className="text-slate-400">+{(job.requirements || []).length - 3} more</li>}
         </ul>
