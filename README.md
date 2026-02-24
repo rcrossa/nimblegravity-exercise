@@ -1,4 +1,4 @@
-# Nimble Gravity Challenge
+# NimbleGravity Challenge
 
 This repository contains the candidate solution for the **Nimble Gravity Frontend Challenge**. It implements a React Single Page Application (SPA) designed to authenticate candidates, fetch open job listings from the provided Azure backend API, and allow the submission of a GitHub repository link as an application to those roles.
 
