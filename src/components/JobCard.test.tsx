@@ -1,5 +1,6 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { vi, describe, it, expect, beforeEach } from 'vitest';
+import type { Mock } from 'vitest';
 import JobCard from './JobCard';
 import { apiClient } from '../api/client';
 
@@ -33,7 +34,7 @@ describe('JobCard Component', () => {
   });
 
   it('submits application successfully', async () => {
-    (apiClient.applyToJob as any).mockResolvedValue({ ok: true });
+    (apiClient.applyToJob as Mock).mockResolvedValue({ ok: true });
 
     render(<JobCard job={mockJob} candidateId={123} />);
     
@@ -55,7 +56,7 @@ describe('JobCard Component', () => {
   });
 
   it('shows error on failed application', async () => {
-    (apiClient.applyToJob as any).mockResolvedValue({ ok: false, message: 'repo missing' });
+    (apiClient.applyToJob as Mock).mockResolvedValue({ ok: false, message: 'repo missing' });
 
     render(<JobCard job={mockJob} candidateId={123} />);
     
@@ -67,14 +68,13 @@ describe('JobCard Component', () => {
 
     await waitFor(() => {
       expect(screen.getByText(/repo missing/i)).toBeInTheDocument();
-      // Ensure loading state is reset
       const submitBtnAfter = screen.getByRole('button', { name: /Apply to this Job/i });
       expect(submitBtnAfter).not.toBeDisabled();
     });
   });
 
   it('shows generic Connection error on non-ApiError failures', async () => {
-    (apiClient.applyToJob as any).mockRejectedValue(new Error('Network Down'));
+    (apiClient.applyToJob as Mock).mockRejectedValue(new Error('Network Down'));
 
     render(<JobCard job={mockJob} candidateId={123} />);
     
@@ -90,7 +90,7 @@ describe('JobCard Component', () => {
   });
 
   it('shows fallback Connection error on unknown throw', async () => {
-    (apiClient.applyToJob as any).mockRejectedValue('String Error');
+    (apiClient.applyToJob as Mock).mockRejectedValue('String Error');
 
     render(<JobCard job={mockJob} candidateId={123} />);
     

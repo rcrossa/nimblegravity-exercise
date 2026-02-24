@@ -1,10 +1,10 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { vi, describe, it, expect, beforeEach } from 'vitest';
+import type { Mock } from 'vitest';
 import EmailLogin from './EmailLogin';
 import { apiClient } from '../api/client';
 
-// Mock the API client
 vi.mock('../api/client', () => ({
   apiClient: {
     getCandidateByEmail: vi.fn(),
@@ -18,7 +18,7 @@ const mockNavigate = vi.fn();
 vi.mock('react-router-dom', async () => {
   const actual = await vi.importActual('react-router-dom');
   return {
-    ...actual as any,
+    ...(actual as Record<string, unknown>),
     useNavigate: () => mockNavigate,
   };
 });
@@ -37,7 +37,7 @@ describe('EmailLogin Component', () => {
 
   it('handles successful API login and redirects', async () => {
     const mockReponse = { uuid: '123-abc', candidateId: 999, email: 'test@test.com', firstName: 'Test', lastName: 'User', applicationId: '456' };
-    (apiClient.getCandidateByEmail as any).mockResolvedValue(mockReponse);
+    (apiClient.getCandidateByEmail as Mock).mockResolvedValue(mockReponse);
 
     render(<BrowserRouter><EmailLogin /></BrowserRouter>);
     
@@ -57,7 +57,7 @@ describe('EmailLogin Component', () => {
   });
 
   it('displays error on failed fetch', async () => {
-    (apiClient.getCandidateByEmail as any).mockRejectedValue(new Error('Candidate not found'));
+    (apiClient.getCandidateByEmail as Mock).mockRejectedValue(new Error('Candidate not found'));
 
     render(<BrowserRouter><EmailLogin /></BrowserRouter>);
     

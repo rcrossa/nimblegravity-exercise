@@ -1,32 +1,30 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import type { Mock } from 'vitest';
 import { apiClient, ApiError } from './client';
 
-declare global {
-  var fetch: any;
-}
 
 describe('API Client', () => {
-  const originalFetch = global.fetch;
+  const originalFetch = globalThis.fetch;
 
   beforeEach(() => {
-    global.fetch = vi.fn();
+    globalThis.fetch = vi.fn();
   });
 
   afterEach(() => {
-    global.fetch = originalFetch;
+    globalThis.fetch = originalFetch;
     vi.clearAllMocks();
   });
 
   it('should format URL and headers correctly for GET calls', async () => {
     const mockResponse = { candidateId: 123, email: 'test@test.com' };
-    (global.fetch as any).mockResolvedValueOnce({
+    (globalThis.fetch as Mock).mockResolvedValueOnce({
       ok: true,
       json: async () => mockResponse,
     });
 
     const result = await apiClient.getCandidateByEmail('test@test.com');
     expect(result).toEqual(mockResponse);
-    expect(global.fetch).toHaveBeenCalledWith(
+    expect(globalThis.fetch).toHaveBeenCalledWith(
       expect.stringContaining('/api/candidate/get-by-email?email=test%40test.com'),
       expect.objectContaining({
         headers: expect.objectContaining({
@@ -38,7 +36,7 @@ describe('API Client', () => {
 
   it('should format payload correctly for POST calls', async () => {
     const mockResponse = { ok: true };
-    (global.fetch as any).mockResolvedValueOnce({
+    (globalThis.fetch as Mock).mockResolvedValueOnce({
       ok: true,
       json: async () => mockResponse,
     });
@@ -47,7 +45,7 @@ describe('API Client', () => {
     const result = await apiClient.applyToJob(payload);
     
     expect(result).toEqual(mockResponse);
-    expect(global.fetch).toHaveBeenCalledWith(
+    expect(globalThis.fetch).toHaveBeenCalledWith(
       expect.stringContaining('/api/candidate/apply-to-job'),
       expect.objectContaining({
         method: 'POST',
@@ -58,21 +56,21 @@ describe('API Client', () => {
 
   it('should fetch jobs correctly', async () => {
     const mockResponse = [{ id: 1, title: 'Job 1' }];
-    (global.fetch as any).mockResolvedValueOnce({
+    (globalThis.fetch as Mock).mockResolvedValueOnce({
       ok: true,
       json: async () => mockResponse,
     });
 
     const result = await apiClient.getJobs();
     expect(result).toEqual(mockResponse);
-    expect(global.fetch).toHaveBeenCalledWith(
+    expect(globalThis.fetch).toHaveBeenCalledWith(
       expect.stringContaining('/api/jobs/get-list'),
       expect.any(Object)
     );
   });
 
   it('should throw ApiError when response is not ok', async () => {
-    (global.fetch as any).mockResolvedValue({
+    (globalThis.fetch as Mock).mockResolvedValue({
       ok: false,
       status: 404,
       json: async () => ({ message: 'Not found' }),
@@ -83,7 +81,7 @@ describe('API Client', () => {
   });
 
   it('should throw ApiError when ok is false in payload despite 200 status', async () => {
-    (global.fetch as any).mockResolvedValue({
+    (globalThis.fetch as Mock).mockResolvedValue({
       ok: true,
       status: 200,
       json: async () => ({ ok: false, details: 'Payload error' }),
@@ -94,7 +92,7 @@ describe('API Client', () => {
   });
 
   it('should throw generic ApiError when JSON fails to parse on bad response', async () => {
-    (global.fetch as any).mockResolvedValue({
+    (globalThis.fetch as Mock).mockResolvedValue({
       ok: false,
       status: 500,
       json: async () => Promise.reject(new Error('Invalid JSON')),

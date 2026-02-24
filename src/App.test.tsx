@@ -21,7 +21,6 @@ describe('App Component', () => {
       </MemoryRouter>
     );
     
-    // Validating that the EmailLogin component is rendered
     expect(screen.getByText('Candidate Login')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /Continue to Jobs/i })).toBeInTheDocument();
   });
