@@ -1,4 +1,4 @@
-import type { CandidateResponse, JobsResponse, ApplyResponse, JobApplicationPayload } from '../types';
+import type { CandidateResponse, Job, ApplyResponse, JobApplicationPayload } from '../types';
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://botfilter-h5ddh6dye8exb7ha.centralus-01.azurewebsites.net';
 
@@ -37,7 +37,7 @@ export const apiClient = {
     fetchClient<CandidateResponse>(`/api/candidate/get-by-email?email=${encodeURIComponent(email)}`),
     
   getJobs: () => 
-    fetchClient<JobsResponse>(`/api/jobs/get-list`),
+    fetchClient<Job[]>(`/api/jobs/get-list`),
     
   applyToJob: (payload: JobApplicationPayload) => 
     fetchClient<ApplyResponse>(`/api/candidate/apply-to-job`, {

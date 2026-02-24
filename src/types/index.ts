@@ -1,27 +1,23 @@
 export interface CandidateResponse {
-  ok: boolean;
-  user: {
-    uuid: string;
-    candidateId: number;
-    email: string;
-    firstName: string;
-    lastName: string;
-  };
+  uuid: string;
+  candidateId: number;
+  applicationId: string;
+  email: string;
+  firstName: string;
+  lastName: string;
 }
 
 export interface Job {
   id: number;
   title: string;
-  department: string;
-  description: string;
-  requirements: string[];
-  isActive: boolean;
+  department?: string;
+  description?: string;
+  requirements?: string[];
+  isActive?: boolean;
 }
 
-export interface JobsResponse {
-  ok: boolean;
-  jobs: Job[];
-}
+// Jobs response es simplemente un Array de Job, por lo que podemos usar Job[]
+
 
 export interface ApplyResponse {
   ok: boolean;

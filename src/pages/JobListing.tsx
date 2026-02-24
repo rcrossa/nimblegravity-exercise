@@ -23,9 +23,10 @@ export default function JobListing() {
     const fetchJobs = async () => {
       try {
         const resp = await apiClient.getJobs();
-        if (resp.ok && resp.jobs) {
-          // Filter to show active jobs only, defensive programming
-          setJobs(resp.jobs.filter(j => j.isActive));
+        if (Array.isArray(resp)) {
+          // Si pasaron la validación son un array de trabajos.
+          // Ignoramos la key opcional y mapeamos de igual forma por si la API regresa isActive = false
+          setJobs(resp.filter(j => j.isActive !== false));
         } else {
           setErrorMsg('Failed to load job listings from server');
         }
