@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/14</span>
+                <span class='fraction'>14/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">88.88% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/9</span>
+                <span class='fraction'>8/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/13</span>
+                <span class='fraction'>13/13</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -109,19 +109,19 @@
 <a name='L44'></a><a href='#L44'>44</a>
 <a name='L45'></a><a href='#L45'>45</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -129,43 +129,43 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import type { CandidateResponse, Job, ApplyResponse, JobApplicationPayload } from '../types';
 &nbsp;
-const BASE_URL = <span class="cstat-no" title="statement not covered" >import.meta.env.VITE_API_BASE_URL || 'https://botfilter-h5ddh6dye8exb7ha.centralus-01.azurewebsites.net';</span>
+const BASE_URL = import.meta.env.VITE_API_BASE_URL || <span class="branch-1 cbranch-no" title="branch not covered" >'https://botfilter-h5ddh6dye8exb7ha.centralus-01.azurewebsites.net';</span>
 &nbsp;
 export class ApiError extends Error {
   status?: number;
-<span class="fstat-no" title="function not covered" >  constructor(m</span>essage: string, status?: number) {
-<span class="cstat-no" title="statement not covered" >    super(message);</span>
-<span class="cstat-no" title="statement not covered" >    this.name = 'ApiError';</span>
-<span class="cstat-no" title="statement not covered" >    this.status = status;</span>
+  constructor(message: string, status?: number) {
+    super(message);
+    this.name = 'ApiError';
+    this.status = status;
   }
 }
 &nbsp;
-async function <span class="fstat-no" title="function not covered" >fetchClient&lt;T&gt;(e</span>ndpoint: string, options?: RequestInit): Promise&lt;T&gt; {
-  const response = <span class="cstat-no" title="statement not covered" >await fetch(`${BASE_URL}${endpoint}`, {</span>
+async function fetchClient&lt;T&gt;(endpoint: string, options?: RequestInit): Promise&lt;T&gt; {
+  const response = await fetch(`${BASE_URL}${endpoint}`, {
     ...options,
     headers: {
       'Content-Type': 'application/json',
@@ -173,24 +173,24 @@ async function <span class="fstat-no" title="function not covered" >fetchClient&
     },
   });
 &nbsp;
-  const data = <span class="cstat-no" title="statement not covered" >await response.json().catch(<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >n</span>ull)</span>;</span>
+  const data = await response.json().catch(() =&gt; null);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  if (!response.ok || data?.ok === false) {</span>
-<span class="cstat-no" title="statement not covered" >    throw new ApiError(data?.message || data?.details || 'An unknown API error occurred', response.status);</span>
+  if (!response.ok || data?.ok === false) {
+    throw new ApiError(data?.message || data?.details || 'An unknown API error occurred', response.status);
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return data as T;</span>
+  return data as T;
 }
 &nbsp;
-export const apiClient = <span class="cstat-no" title="statement not covered" >{</span>
-  getCandidateByEmail: <span class="fstat-no" title="function not covered" >(e</span>mail: string) =&gt; 
-<span class="cstat-no" title="statement not covered" >    fetchClient&lt;CandidateResponse&gt;(`/api/candidate/get-by-email?email=${encodeURIComponent(email)}`),</span>
+export const apiClient = {
+  getCandidateByEmail: (email: string) =&gt; 
+    fetchClient&lt;CandidateResponse&gt;(`/api/candidate/get-by-email?email=${encodeURIComponent(email)}`),
     
-  getJobs: <span class="fstat-no" title="function not covered" >() =&gt; </span>
-<span class="cstat-no" title="statement not covered" >    fetchClient&lt;Job[]&gt;(`/api/jobs/get-list`),</span>
+  getJobs: () =&gt; 
+    fetchClient&lt;Job[]&gt;(`/api/jobs/get-list`),
     
-  applyToJob: <span class="fstat-no" title="function not covered" >(p</span>ayload: JobApplicationPayload) =&gt; 
-<span class="cstat-no" title="statement not covered" >    fetchClient&lt;ApplyResponse&gt;(`/api/candidate/apply-to-job`, {</span>
+  applyToJob: (payload: JobApplicationPayload) =&gt; 
+    fetchClient&lt;ApplyResponse&gt;(`/api/candidate/apply-to-job`, {
       method: 'POST',
       body: JSON.stringify(payload)
     })
@@ -202,7 +202,7 @@ export const apiClient = <span class="cstat-no" title="statement not covered" >{
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-24T17:01:14.278Z
+                at 2026-02-24T17:10:00.053Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

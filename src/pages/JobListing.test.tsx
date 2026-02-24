@@ -2,7 +2,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { vi, describe, it, expect, beforeEach } from 'vitest';
 import JobListing from './JobListing';
-import { apiClient } from '../api/client';
+import { apiClient, ApiError } from '../api/client';
 
 // Mock the API client
 vi.mock('../api/client', () => ({
@@ -55,14 +55,53 @@ describe('JobListing Component', () => {
     });
   });
 
-  it('displays error if jobs fetch fails', async () => {
+  it('displays error if jobs fetch fails with ApiError', async () => {
     sessionStorage.setItem('candidateId', '123');
-    (apiClient.getJobs as any).mockRejectedValue(new Error('Network error'));
+    (apiClient.getJobs as any).mockRejectedValue(new ApiError('API Rate Limit', 429));
 
     render(<BrowserRouter><JobListing /></BrowserRouter>);
     
     await waitFor(() => {
-      expect(screen.getByText('Error Loading Jobs')).toBeInTheDocument();
+      expect(screen.getByText('API Rate Limit')).toBeInTheDocument();
     });
+  });
+
+  it('displays generic error if jobs fetch fails with unknown error', async () => {
+    sessionStorage.setItem('candidateId', '123');
+    (apiClient.getJobs as any).mockRejectedValue('Strange error payload');
+
+    render(<BrowserRouter><JobListing /></BrowserRouter>);
+    
+    await waitFor(() => {
+      expect(screen.getByText('An error occurred while fetching jobs')).toBeInTheDocument();
+    });
+  });
+
+  it('displays empty state if jobs arrive empty', async () => {
+    sessionStorage.setItem('candidateId', '123');
+    (apiClient.getJobs as any).mockResolvedValue([]);
+
+    render(<BrowserRouter><JobListing /></BrowserRouter>);
+    
+    await waitFor(() => {
+      expect(screen.getByText('No active positions available at the moment.')).toBeInTheDocument();
+    });
+  });
+
+  it('handles sign out button click', async () => {
+    sessionStorage.setItem('candidateId', '123');
+    (apiClient.getJobs as any).mockResolvedValue([]);
+
+    render(<BrowserRouter><JobListing /></BrowserRouter>);
+    
+    await waitFor(() => {
+      expect(screen.getByText('Sign Out')).toBeInTheDocument();
+    });
+
+    const signOutBtn = screen.getByText('Sign Out');
+    signOutBtn.click();
+
+    expect(sessionStorage.getItem('candidateId')).toBeNull();
+    expect(mockNavigate).toHaveBeenCalledWith('/');
   });
 });

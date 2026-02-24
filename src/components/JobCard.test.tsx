@@ -67,6 +67,41 @@ describe('JobCard Component', () => {
 
     await waitFor(() => {
       expect(screen.getByText(/repo missing/i)).toBeInTheDocument();
+      // Ensure loading state is reset
+      const submitBtnAfter = screen.getByRole('button', { name: /Apply to this Job/i });
+      expect(submitBtnAfter).not.toBeDisabled();
+    });
+  });
+
+  it('shows generic Connection error on non-ApiError failures', async () => {
+    (apiClient.applyToJob as any).mockRejectedValue(new Error('Network Down'));
+
+    render(<JobCard job={mockJob} candidateId={123} />);
+    
+    const input = screen.getByPlaceholderText(/https:\/\/github.com\//i);
+    const submitBtn = screen.getByRole('button', { name: /Apply to this Job/i });
+
+    fireEvent.change(input, { target: { value: 'https://github.com/user/repo' } });
+    fireEvent.click(submitBtn);
+
+    await waitFor(() => {
+      expect(screen.getByText(/Network Down/i)).toBeInTheDocument();
+    });
+  });
+
+  it('shows fallback Connection error on unknown throw', async () => {
+    (apiClient.applyToJob as any).mockRejectedValue('String Error');
+
+    render(<JobCard job={mockJob} candidateId={123} />);
+    
+    const input = screen.getByPlaceholderText(/https:\/\/github.com\//i);
+    const submitBtn = screen.getByRole('button', { name: /Apply to this Job/i });
+
+    fireEvent.change(input, { target: { value: 'https://github.com/user/repo' } });
+    fireEvent.click(submitBtn);
+
+    await waitFor(() => {
+      expect(screen.getByText(/Connection error/i)).toBeInTheDocument();
     });
   });
 });
