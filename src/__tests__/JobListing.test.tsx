@@ -2,7 +2,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { vi, describe, it, expect, beforeEach } from 'vitest';
 import type { Mock } from 'vitest';
-import JobListing from './JobListing';
+import JobListing from '../pages/JobListing';
 import { apiClient, ApiError } from '../api/client';
 
 vi.mock('../api/client', () => ({

@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import type { Mock } from 'vitest';
-import { apiClient, ApiError } from './client';
+import { apiClient, ApiError } from '../api/client';
 
 
 describe('API Client', () => {

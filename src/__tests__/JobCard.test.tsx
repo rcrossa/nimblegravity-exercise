@@ -1,7 +1,7 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { vi, describe, it, expect, beforeEach } from 'vitest';
 import type { Mock } from 'vitest';
-import JobCard from './JobCard';
+import JobCard from '../components/JobCard';
 import { apiClient } from '../api/client';
 
 vi.mock('../api/client', () => ({
